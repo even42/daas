@@ -39,3 +39,4 @@ RUN echo 'alias sf="php app/console"' >> ~/.bashrc
 RUN chown -R www-data:www-data /var/www/html
 
 WORKDIR /var/www/html
+RUN cd /var/www/html && ls -la

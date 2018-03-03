@@ -53,8 +53,8 @@ RUN cd /usr/src && wget http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz \
 && tar zxf nginx-$NGINX_VERSION.tar.gz \
 && cd nginx-$NGINX_VERSION \
 && ./configure \
---user=nginx \
---group=nginx \
+--user=www-data \
+--group=www-data \
 --prefix=/etc/nginx \
 --sbin-path=/usr/sbin/nginx \
 --modules-path=/usr/lib/nginx/modules \

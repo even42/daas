@@ -16,6 +16,7 @@ services:
       - php
       - database
 
+
   php:
     build: php
     container_name: daas_php
@@ -25,14 +26,18 @@ services:
     volumes:
       - "../app:/var/www/html:rw"
 
+
   node:
     build: node
     container_name: daas_node
-    restart: always
+    #restart: always
     networks:
       - backend
     volumes:
       - "../app:/var/www/html:rw"
+    ports:
+      - "8080:8080"
+
 
   database:
     image: mariadb
