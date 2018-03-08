@@ -34,7 +34,7 @@ services:
     networks:
       - backend
     volumes:
-      - "../app:/var/www/html:rw"
+      - "../app/frontend/reactjs:/var/www/html:rw"
     ports:
       - "8080:8080"
 
