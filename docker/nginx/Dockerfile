@@ -90,9 +90,11 @@ RUN set -x ; \
 ADD nginx.conf /etc/nginx/
 ADD symfony.conf /etc/nginx/sites-available/
 ADD drupal.conf /etc/nginx/sites-available/
+ADD node.conf /etc/nginx/sites-available/
 
 RUN ln -s /etc/nginx/sites-available/symfony.conf /etc/nginx/sites-enabled/symfony
 RUN ln -s /etc/nginx/sites-available/drupal.conf /etc/nginx/sites-enabled/drupal
+RUN ln -s /etc/nginx/sites-available/node.conf /etc/nginx/sites-enabled/node
 
 CMD ["nginx"]
 
