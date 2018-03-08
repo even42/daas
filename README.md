@@ -9,13 +9,18 @@ In order to execute the DAAS in localhost env, add in /etc/hosts :
 
 ## Get started
 
-### Run the DaaS
+
+#### Run the DaaS first time
+`make install`
+
+
+#### Run the DaaS
 `make start`
 
-### Stop the DaaS
+#### Stop the DaaS
 `make stop`
 
-### Test the DaaS
+#### Test the DaaS
 
 In order to test the DaaS check the urls below :
 
