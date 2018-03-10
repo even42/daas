@@ -42,6 +42,8 @@ services:
       - backend
     volumes:
       - "./app/frontend/reactjs/src:/var/www/html/src:rw"
+      - "./app/frontend/reactjs/package.json:/var/www/html/package.json:rw"
+      - "./app/frontend/reactjs/webpack.config.js:/var/www/html/webpack.config.js:rw"
     ports:
       - "8080:8080"
 

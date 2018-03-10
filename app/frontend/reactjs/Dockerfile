@@ -5,6 +5,8 @@ RUN mkdir -p /var/www/html
 WORKDIR /var/www/html
 
 COPY package.json /var/www/html
+COPY webpack.config.js /var/www/html
+COPY .babelrc /var/www/html
 
 ADD src /var/www/html/src
 
