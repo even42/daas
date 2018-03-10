@@ -37,7 +37,8 @@ RUN apt-get install vim -y
 RUN echo 'alias sf="php app/console"' >> ~/.bashrc
 RUN echo 'alias ll="ls -la"' >> ~/.bashrc
 
-
+RUN mkdir -p /var/www/html
+ADD . /var/www/html
 
 WORKDIR /var/www/html
 COPY composer.json .
