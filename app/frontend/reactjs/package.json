@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon -L app/bin/www"
+    "start": "pm2-runtime src/server.js"
   },
   "dependencies": {
     "express": "~4.9.0",

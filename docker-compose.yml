@@ -1,0 +1,91 @@
+version: '3'
+services:
+  nginx:
+    build: ./docker/nginx
+    container_name: daas_nginx
+    volumes:
+      - "./app/backend/drupal:/var/www/html/drupal:rw"
+      - "./app/backend/symfony:/var/www/html/symfony:rw"
+    ports:
+      - "80:80"
+    environment:
+      - NGINX_HOST=localhost
+    networks:
+      - backend
+    #command: [nginx, '-g', 'daemon off;']
+    depends_on:
+      - database
+      - drupal
+      - symfony
+      - frontendjs
+    links:
+      - database
+      - drupal
+      - symfony
+      - frontendjs
+
+  drupal:
+    build: ./app/backend/drupal
+    container_name: daas_drupal
+    restart: always
+    networks:
+      - backend
+    volumes:
+      - "./app/backend/drupal:/var/www/html/drupal:rw"
+    depends_on:
+      - database
+
+  symfony:
+    build: ./app/backend/symfony
+    container_name: daas_symfony
+    restart: always
+    networks:
+      - backend
+    depends_on:
+      - database
+    volumes:
+      - "./app/backend/symfony:/var/www/html/symfony:rw"
+#      - "./app/backend/symfony/public:/var/www/html/public:rw"
+#      - "./app/backend/symfony/src:/var/www/html/src:rw"
+#      - "./app/backend/symfony/config:/var/www/html/config:rw"
+
+
+  php:
+    build: ./docker/php
+    container_name: daas_php
+    restart: always
+    networks:
+      - backend
+    volumes:
+      - "./app/backend/drupal:/var/www/html/drupal:rw"
+      - "./app/backend/symfony:/var/www/html/symfony:rw"
+
+
+  frontendjs:
+    build: ./app/frontend/reactjs
+    container_name: daas_fontendjs
+    #restart: always
+    networks:
+      - backend
+    volumes:
+      - "./app/frontend/reactjs/src:/var/www/html/src:rw"
+    ports:
+      - "8080:8080"
+
+  database:
+    image: mariadb
+    container_name: daas_db
+    restart: always
+    networks:
+      - backend
+    environment:
+      - MYSQL_DATABASE=daas_db
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=root
+    ports:
+      - "3306:3306"
+
+
+networks:
+  backend:
+    driver: bridge

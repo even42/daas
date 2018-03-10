@@ -96,7 +96,13 @@ RUN ln -s /etc/nginx/sites-available/symfony.conf /etc/nginx/sites-enabled/symfo
 RUN ln -s /etc/nginx/sites-available/drupal.conf /etc/nginx/sites-enabled/drupal
 RUN ln -s /etc/nginx/sites-available/node.conf /etc/nginx/sites-enabled/node
 
+
+RUN mkdir -p /var/www/html
+WORKDIR /var/www/html
+
+RUN chown -R www-data:www-data /var/www/html
+
 CMD ["nginx"]
 
-RUN ls -la /etc/nginx/
+RUN ls -la /var/www/html
 
