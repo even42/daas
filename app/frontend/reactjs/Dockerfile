@@ -9,8 +9,8 @@ COPY webpack.config.js /var/www/html
 COPY .babelrc /var/www/html
 
 ADD src /var/www/html/src
-
-RUN npm install pm2 -g
-RUN npm install
+#RUN npm config set proxy "http://tools.mui.jcdecaux.com:3128/"
+#RUN npm install pm2 -g
+#RUN npm install
 
 CMD ["npm", "start"]

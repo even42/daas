@@ -3,9 +3,8 @@ services:
   nginx:
     build: ./docker/nginx
     container_name: daas_nginx
-    volumes:
+    volumese:
       - "./app/backend/drupal:/var/www/html/drupal:rw"
-      - "./app/backend/symfony:/var/www/html/symfony:rw"
     ports:
       - "80:80"
     environment:
@@ -14,13 +13,14 @@ services:
       - backend
     #command: [nginx, '-g', 'daemon off;']
     depends_on:
-      - database
+      #- database
       - php
-      - frontendjs
+      - drupal
+      #- frontendjs
     links:
-      - database
+      #- database
       - php
-      - frontendjs
+      - drupal
 
 
   php:
@@ -33,32 +33,42 @@ services:
       - "./app/backend/drupal:/var/www/html/drupal:rw"
       - "./app/backend/symfony:/var/www/html/symfony:rw"
 
-
-  frontendjs:
-    build: ./app/frontend/reactjs
-    container_name: daas_fontendjs
-    #restart: always
-    networks:
-      - backend
-    volumes:
-      - "./app/frontend/reactjs/src:/var/www/html/src:rw"
-      - "./app/frontend/reactjs/package.json:/var/www/html/package.json:rw"
-      - "./app/frontend/reactjs/webpack.config.js:/var/www/html/webpack.config.js:rw"
-    ports:
-      - "8080:8080"
-
-  database:
-    image: mariadb
-    container_name: daas_db
+  drupal:
+    build: ./app/backend/drupal
+    container_name: daas_drupal
     restart: always
     networks:
       - backend
-    environment:
-      - MYSQL_DATABASE=daas_db
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_USER=root
-    ports:
-      - "3306:3306"
+    volumes:
+      - "./app/backend/drupal:/var/www/html/drupal:rw"
+    #depends_on:
+    #  - database
+
+#  frontendjs:
+#    build: ./app/frontend/reactjs
+#    container_name: daas_fontendjs
+#    #restart: always
+#    networks:
+#      - backend
+#    volumes:
+#      - "./app/frontend/reactjs/src:/var/www/html/src:rw"
+#      - "./app/frontend/reactjs/package.json:/var/www/html/package.json:rw"
+#      - "./app/frontend/reactjs/webpack.config.js:/var/www/html/webpack.config.js:rw"
+#    ports:
+#      - "8080:8080"
+
+#  database:
+#    image: mariadb
+#    container_name: daas_db
+#    restart: always
+#    networks:
+#      - backend
+#    environment:
+#      - MYSQL_DATABASE=daas_db
+#      - MYSQL_ROOT_PASSWORD=root
+#      - MYSQL_USER=root
+#    ports:
+#      - "3306:3306"
 
 
 networks:
