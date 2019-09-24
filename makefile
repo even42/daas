@@ -8,6 +8,8 @@ stop:
 	docker-compose -f docker-compose.yml stop
 
 install: start
-	@docker exec -ti daas_php sh -c "cd /var/www/html/drupal/ && composer install"
+	cd app/backend/drupal/ && composer install
+#	@docker exec -ti daas_drupal sh -c "cd /var/www/html/daas/backend/drupal/ && composer install"
+#	@docker exec -ti daas_nginx sh -c "cd /var/www/html/daas/backend/drupal/  && composer install"
 #	@docker exec -ti daas_php sh -c "cd /var/www/html/symfony/ && composer install"
 #	@docker exec -ti daas_fontendjs sh -c "cd /var/www/html/ && npm install && npm run build"

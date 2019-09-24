@@ -3,8 +3,8 @@ services:
   nginx:
     build: ./docker/nginx
     container_name: daas_nginx
-    volumese:
-      - "./app/backend/drupal:/var/www/html/drupal:rw"
+    volumes:
+      - "./app:/var/www/html/daas:rw"
     ports:
       - "80:80"
     environment:
@@ -14,24 +14,24 @@ services:
     #command: [nginx, '-g', 'daemon off;']
     depends_on:
       #- database
-      - php
+      #- php
       - drupal
       #- frontendjs
     links:
       #- database
-      - php
+      #- php
       - drupal
 
 
-  php:
-    build: ./docker/php
-    container_name: daas_php
-    restart: always
-    networks:
-      - backend
-    volumes:
-      - "./app/backend/drupal:/var/www/html/drupal:rw"
-      - "./app/backend/symfony:/var/www/html/symfony:rw"
+#  php:
+#    build: ./docker/php
+#    container_name: daas_php
+#    restart: always
+#    networks:
+#      - backend
+#    volumes:
+#      - "./app/backend/drupal:/var/www/html/drupal:rw"
+#      - "./app/backend/symfony:/var/www/html/symfony:rw"
 
   drupal:
     build: ./app/backend/drupal
@@ -40,7 +40,7 @@ services:
     networks:
       - backend
     volumes:
-      - "./app/backend/drupal:/var/www/html/drupal:rw"
+      - "./app:/var/www/html/daas:rw"
     #depends_on:
     #  - database
 

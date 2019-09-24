@@ -105,10 +105,13 @@ RUN ln -s /etc/nginx/sites-available/drupal.conf /etc/nginx/sites-enabled/drupal
 
 
 RUN mkdir -p /var/www/html
+#RUN chown -R www-data:www-data /var/www/html
 WORKDIR /var/www/html
 
+RUN echo 'alias ll="ls -la"' >> ~/.bashrc
+RUN apt-get install vim -y
 
-RUN chown -R www-data:www-data /var/www/html
+
 
 CMD ["nginx"]
 
