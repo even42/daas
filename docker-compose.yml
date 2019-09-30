@@ -4,7 +4,7 @@ services:
     build: ./docker/nginx
     container_name: daas_nginx
     volumes:
-      - "./app:/var/www/html/daas:rw"
+      - "./app/backend/drupal:/var/www/html/:rw"
     ports:
       - "80:80"
     environment:
@@ -40,7 +40,7 @@ services:
     networks:
       - backend
     volumes:
-      - "./app:/var/www/html/daas:rw"
+      - "./app/backend/drupal:/var/www/html/:rw"
     #depends_on:
     #  - database
 
