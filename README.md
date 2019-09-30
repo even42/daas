@@ -3,9 +3,16 @@
 ## Install
 
 In order to execute the DAAS in localhost env, add in /etc/hosts :
-- symfony.local
-- drupal.local
-- node.local
+- drupal.local (back)
+- graphql.local (services)
+- node.local (front)
+- nginx.local (web server)
+- krackenD.local (API Gateway)
+- varnish.local (reverse proxy cache)
+
+
+`127.0.0.1   localhost drupal.local node.local varnish.local krackend.loca`
+
 
 ## Get started
 
@@ -14,8 +21,8 @@ In order to execute the DAAS in localhost env, add in /etc/hosts :
 `make install`
 
 
-#### Run the DaaS
-`make start`
+#### Build the DaaS
+`make build`
 
 #### Stop the DaaS
 `make stop`
@@ -24,10 +31,9 @@ In order to execute the DAAS in localhost env, add in /etc/hosts :
 
 In order to test the DaaS check the urls below :
 
-- http://symfony.local
-- http://drupal.local
+- http://drupal.local:8080
 - http://node.local:8080
-
+- http://varnish.local
 
 ## Usefull
  
